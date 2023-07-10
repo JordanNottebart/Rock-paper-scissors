@@ -1,12 +1,63 @@
-const playerSelection = "Paper";
-const computerSelection = getComputerChoice();
+game();
 
-console.log(playerSelection);
-console.log(computerSelection);
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+    let playerSelection = "";
+    let computerSelection = "";
+    let playerScore = 0;
+    let computerScore = 0;
+    let results;
+    let numberOfGamesInput = "";
+    let numberOfGames = 0;
+    let isValid = false;
+
+    while(!isValid) {
+        numberOfGamesInput = prompt("How many games do you want to play?");
+        numberOfGames = parseInt(numberOfGamesInput);
+
+        if (isNaN(numberOfGames)) {
+            console.log("Not a valid input!");
+        }
+        else {
+            isValid = true;
+        }
+    }
+    
+    for (let index = 0; index < numberOfGames; index++) {
+        playerSelection = prompt(`Play ${numberOfGames} games of Rock Paper Scissors!\nChoice:`);
+        computerSelection = getComputerChoice();
+
+        console.log(playerSelection);
+        console.log(computerSelection);
+
+        results = (playRound(playerSelection, computerSelection));
+
+        // If there was an error remove that attempt from the game
+        if (results === 10) {
+            index--;
+        }
+        // If the player won, add a point to the playerScore
+        else if (results === 1) {
+            playerScore++;
+        }
+        // If the computer won, add a point to the computerScore
+        else if (results === -1) {
+            computerScore++;
+        }
+    }
+
+    if (playerScore > computerScore) {
+        console.log(`You won! Player: ${playerScore} Computer: ${computerScore}`);
+    } 
+    else if (computerScore > playerScore) {
+        console.log(`You lost! Player: ${playerScore} Computer: ${computerScore}`);
+    }
+    else {
+        console.log(`It's a draw! Player: ${playerScore} Computer: ${computerScore}`)
+    }
+}
 
 function getComputerChoice() {
-    let randomNumber = Math.floor(Math.random()* 3);
+    let randomNumber = Math.floor(Math.random() * 3);
 
     if(randomNumber === 0) {
         return "Rock";
@@ -24,35 +75,48 @@ function playRound(playerSelection, computerSelection) {
 
     if (playerSelectionLowerCase === "rock") {
         if (computerSelection === "Rock") {
-            return "It's a draw! You both chose Rock!";
+            console.log("It's a draw! You both chose Rock!");
+            return 0;
         }
         else if (computerSelection === "Paper") {
-            return "You lose! Paper beats Rock";
+            console.log("You lose! Paper beats Rock");
+            return -1;
         }
         else {
-            return "You win! Rock beats Scissors";
+            console.log("You win! Rock beats Scissors");
+            return 1;
         }
     }
     else if (playerSelectionLowerCase === "paper") {
         if (computerSelection === "Paper") {
-            return "It's a draw! You both chose Paper!";
+            console.log("It's a draw! You both chose Paper!");
+            return 0;
         }
         else if (computerSelection === "Scissors") {
-            return "You lose! Scissors beats Paper";
+            console.log("You lose! Scissors beats Paper");
+            return -1;
         }
         else {
-            return "You win! Paper beats Rock";
+            console.log("You win! Paper beats Rock");
+            return 1;
+        }
+    }
+    else if (playerSelectionLowerCase === "scissors") {
+        if (computerSelection === "Scissors") {
+            console.log("It's a draw! You both chose Scissors!");
+            return 0;
+        }
+        else if (computerSelection === "Rock") {
+            console.log("You lose! Rock beats Scissors");
+            return -1;
+        }
+        else {
+            console.log("You win! Scissors beats Paper");
+            return 1;
         }
     }
     else {
-        if (computerSelection === "Scissors") {
-            return "It's a draw! You both chose Scissors!";
-        }
-        else if (computerSelection === "Rock") {
-            return "You lose! Rock beats Scissors";
-        }
-        else {
-            return "You win! Scissors beats Paper";
-        }
+        console.log("Not a valid input");
+        return 10;
     }
 }
