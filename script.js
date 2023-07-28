@@ -6,43 +6,25 @@ function game() {
     let playerScore = 0;
     let computerScore = 0;
     let results;
-    let numberOfGamesInput = "";
-    let numberOfGames = 0;
-    let isValid = false;
 
-    while(!isValid) {
-        numberOfGamesInput = prompt("How many games do you want to play?");
-        numberOfGames = parseInt(numberOfGamesInput);
+    computerSelection = getComputerChoice();
 
-        if (isNaN(numberOfGames)) {
-            console.log("Not a valid input!");
-        }
-        else {
-            isValid = true;
-        }
+    console.log(playerSelection);
+    console.log(computerSelection);
+
+    results = (playRound(playerSelection, computerSelection));
+
+    // If there was an error remove that attempt from the game
+    if (results === 10) {
+        index--;
     }
-    
-    for (let index = 0; index < numberOfGames; index++) {
-        playerSelection = prompt(`Play ${numberOfGames} games of Rock Paper Scissors!\nChoice:`);
-        computerSelection = getComputerChoice();
-
-        console.log(playerSelection);
-        console.log(computerSelection);
-
-        results = (playRound(playerSelection, computerSelection));
-
-        // If there was an error remove that attempt from the game
-        if (results === 10) {
-            index--;
-        }
-        // If the player won, add a point to the playerScore
-        else if (results === 1) {
-            playerScore++;
-        }
-        // If the computer won, add a point to the computerScore
-        else if (results === -1) {
-            computerScore++;
-        }
+    // If the player won, add a point to the playerScore
+    else if (results === 1) {
+        playerScore++;
+    }
+    // If the computer won, add a point to the computerScore
+    else if (results === -1) {
+        computerScore++;
     }
 
     if (playerScore > computerScore) {
