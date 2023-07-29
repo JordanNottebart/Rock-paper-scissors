@@ -4,6 +4,11 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
 .container {
@@ -11,7 +16,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 45vw;
     margin: 0px;
 }
 
