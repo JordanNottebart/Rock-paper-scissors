@@ -1,8 +1,14 @@
+const rockButton = document.getElementById("rock");
+const paperButton = document.getElementById("paper");
+const scissorsButton = document.getElementById("scissors");
+const retryButton = document.getElementById("retryButton");
+const playerScoreDisplay = document.getElementById("playerScore");
+const computerScoreDisplay = document.getElementById("computerScore");
+let playerScore = playerScoreDisplay.innerText;
+let computerScore = computerScoreDisplay.innerText;
 let results = document.getElementById("results");
 let resultsRound;
-let rockButton = document.getElementById("rock");
-let paperButton = document.getElementById("paper");
-let scissorsButton = document.getElementById("scissors");
+
 game();
 
 function game() {
@@ -18,14 +24,21 @@ function game() {
         resultsRound = playRound("scissors");
         updateScore(resultsRound);
     });
+    retryButton.addEventListener("click", () => {
+        playerScore = 0;
+        computerScore = 0;
+
+        playerScoreDisplay.innerText = playerScore;
+        computerScoreDisplay.innerText = computerScore;
+        results.innerText = "Make a choice! (First to win 5 games)";
+
+        rockButton.disabled = false;
+        paperButton.disabled = false;
+        scissorsButton.disabled = false;
+    });
 }
 
 function updateScore(resultsRound) {
-    let playerScoreDisplay = document.getElementById("playerScore");
-    let computerScoreDisplay = document.getElementById("computerScore");
-    let playerScore = playerScoreDisplay.innerText;
-    let computerScore = computerScoreDisplay.innerText;
-
     // If the player won, add a point to the playerScore
     if (resultsRound === 1) {
         playerScore++;
