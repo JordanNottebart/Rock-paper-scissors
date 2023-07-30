@@ -55,3 +55,9 @@ body {
     border: 3px solid rgba(80,217,254,255);
     border-radius: 3px;
 }
+
+@media only screen and (max-width: 600px) {
+    .buttons-container {
+        flex-direction: column;
+    }
+}
