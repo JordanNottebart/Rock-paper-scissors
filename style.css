@@ -30,6 +30,11 @@ body {
     width: 150px;
     height: 150px;
     cursor: pointer;
+    transition: transform .2s;
+}
+
+.buttons-container button:hover{
+    transform: scale(1.04);
 }
 
 .buttons-container img {
